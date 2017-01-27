@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-inotify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "node-red inotify node",
   "dependencies": {
     "inotify" : "1.4.1"
@@ -9,7 +9,13 @@
     "nodes": {
       "inotify": "inotify/node-red-inotify.js"
     }
-  },  
+  }, 
+  "maintainers": [
+    {
+      "name": "Miguel Salinas Gancedo",
+      "email": "masalinas.gancedo@gmail.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/thingtrack/node-red-contrib-inotify.git"
@@ -18,8 +24,8 @@
     "node-red",
     "inotify"
   ],
-  "author": "Thingtrack",
-  "license": "ISC",
+  "author": "Miguel Salinas Gancedo",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/thingtrack/node-red-contrib-inotify/issues"
   },
