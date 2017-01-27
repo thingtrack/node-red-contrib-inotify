@@ -12,7 +12,7 @@
   },  
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thingtrack/node-red-contrib-inotify.git"
+    "url": "https://github.com/thingtrack/node-red-contrib-inotify.git"
   },
   "keywords": [
     "node-red",
