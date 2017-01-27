@@ -1,0 +1,27 @@
+{
+  "name": "node-red-contrib-inotify",
+  "version": "1.0.0",
+  "description": "node-red inotify node",
+  "dependencies": {
+    "inotify" : "1.4.1"
+  },  
+  "node-red" : {
+    "nodes": {
+      "inotify": "inotify/node-red-inotify.js"
+    }
+  },  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thingtrack/node-red-contrib-inotify.git"
+  },
+  "keywords": [
+    "node-red",
+    "inotify"
+  ],
+  "author": "Thingtrack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thingtrack/node-red-contrib-inotify/issues"
+  },
+  "homepage": "https://github.com/thingtrack/node-red-contrib-inotify#readme"
+}
