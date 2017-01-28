@@ -5,6 +5,9 @@ By default it's in persistent mode. You can specify false to use the non persist
 
 The events send will contain the following fields in **payload**: ```type``` and ```event```
 
+## Installation
+[NodeJS][nodejs_dev] versions 0.10.x, 0.12.x, 4.x.x, 5.x.x and IO.js 1.x, 2.x, 3.x are currently supported and tested.
+
 ### Message payload object structure is:
 ```javascript
 msg.payload: {
@@ -73,7 +76,7 @@ msg.payload : Object
 { "type": "file", "event": { "watch": 1, "mask": 16, "cookie": 0, "name": "Declaracion.png" } }
  ```
 
-## Capture
+## Sample Node-RED flow capture
 ![inotify](https://cloud.githubusercontent.com/assets/1216181/22396401/29dfb786-e559-11e6-85d1-1caee82d3490.png)
 
 ## Thanks
