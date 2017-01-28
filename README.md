@@ -72,3 +72,9 @@ msg.payload : Object
 msg.payload : Object
 { "type": "file", "event": { "watch": 1, "mask": 16, "cookie": 0, "name": "Declaracion.png" } }
  ```
+
+## Capture
+![inotify](https://cloud.githubusercontent.com/assets/1216181/22396401/29dfb786-e559-11e6-85d1-1caee82d3490.png)
+
+## Thanks
+Thanks to c4milo for this great node package [inotify](https://www.npmjs.com/package/inotify)
