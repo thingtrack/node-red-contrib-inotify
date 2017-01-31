@@ -1,8 +1,9 @@
 module.exports = function(RED) {
   var Inotify = require('inotify').Inotify;
-  //var inotify = new Inotify(); //persistent by default, new Inotify(false) //no persistent
+
   var inotify = undefined; //persistent by default, new Inotify(false) //no persistent
   var node = undefined;
+  var inotify_watch_descriptor = undefined;
 
   function INotify(config) {
     node = this;
@@ -28,10 +29,10 @@ module.exports = function(RED) {
     var payload = {
       type: type,
       event: event
-    }
-
+    };
+    
     node.send({payload: payload});
-  }
+  };
 
   INotify.prototype.startListening = function() {
     // watcher configuration
@@ -41,9 +42,10 @@ module.exports = function(RED) {
       callback:  this.callback
     };
 
-    inotify = new Inotify(this.persistent); 
-
-    // start watcher
-    var inotify_watch_descriptor = inotify.addWatch(inotify_dir);
+    // sigleton patern
+    if (inotify == undefined) {
+      inotify = new Inotify(this.persistent);
+      inotify_watch_descriptor = inotify.addWatch(inotify_dir);
+    }
   }
 }
