@@ -15,28 +15,24 @@ module.exports = function(RED) {
     }
 
     function cleanWatchers() {
+        var index = 0;
         watchers.forEach(function(watcher) {
             var exist = false;
+
+            // search watcher node after deploy
             RED.nodes.eachNode(function(node) {
                 if (node.type == "inotify" && watcher.id == node.id)
                     exist = true;
             });
 
-            if (exist == false) {
-                // stop watcher
+            // if not exist stop watcher and remove it from collection
+            if (exist ==  false) {
                 watcher.inotify.removeWatch(watcher.descriptor);
 
-                // remove watcher from the collection
-                watchers.remove(watcher);
+                watchers.splice(index, 1);
             }
 
-            /*if (RED.nodes.getNode(watcher.id) == undefined) {
-                // stop watcher
-                watcher.inotify.removeWatch(watcher.descriptor);
-
-                // remove watcher from the collection
-                watchers.remove(watcher);
-            }*/
+            index = index + 1;
         });
     }
 
@@ -52,8 +48,9 @@ module.exports = function(RED) {
         this
             this.persistent = config.persistent;
 
-        // create node watcher manager
+        // create watcher manager per node and bind with node (node would be used on the watcher callback)
         this.inotify = new Inotify(this.persistent);
+        this.inotify.node = this;
 
         // start node
         this.startListening();
@@ -69,7 +66,7 @@ module.exports = function(RED) {
             event: event
         };
 
-        this.send({payload: payload});
+        this.node.send({payload: payload});
     };
 
     INotify.prototype.startListening = function() {
@@ -77,9 +74,9 @@ module.exports = function(RED) {
         if (this.folder == undefined)
             return;
 
-        // add new watcher if not not exist. Only add one watcher per path
+        // start new watcher if not not exist. Only add one watcher per path. Listen to all file system events from open to close
         if(getWatcherByPath(this.folder) == undefined) {
-            this.descriptor = this.inotify.addWatch({path: this.folder,
+            this.watch_descriptor = this.inotify.addWatch({path: this.folder,
                                                      watch_for: Inotify.IN_OPEN | Inotify.IN_CLOSE,
                                                      callback:  this.callback
                                                     });
@@ -87,7 +84,7 @@ module.exports = function(RED) {
             // add active watcher to collection
             watchers.push({id: this.id,
                            path: this.folder,
-                           descriptor: this.descriptor,
+                           descriptor: this.watch_descriptor,
                            inotify: this.inotify});
         }
         else {
